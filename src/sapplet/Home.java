@@ -1,8 +1,11 @@
 
 package sapplet;
 
+import helper.WebController;
 import java.applet.Applet;
 import java.applet.AppletStub;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -67,6 +70,12 @@ public class Home extends javax.swing.JApplet implements  AppletStub {
         ButtonToAdmin = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        webC = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        searchOnWeb = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(788, 513));
 
@@ -79,7 +88,7 @@ public class Home extends javax.swing.JApplet implements  AppletStub {
             }
         });
         jPanel1.add(ButtonToUser);
-        ButtonToUser.setBounds(455, 112, 55, 23);
+        ButtonToUser.setBounds(455, 112, 57, 32);
 
         ButtonToVote.setText("Vote Register");
         ButtonToVote.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +97,7 @@ public class Home extends javax.swing.JApplet implements  AppletStub {
             }
         });
         jPanel1.add(ButtonToVote);
-        ButtonToVote.setBounds(528, 112, 120, 23);
+        ButtonToVote.setBounds(528, 112, 120, 32);
 
         ButtonToAdmin.setText("Admin");
         ButtonToAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +106,7 @@ public class Home extends javax.swing.JApplet implements  AppletStub {
             }
         });
         jPanel1.add(ButtonToAdmin);
-        ButtonToAdmin.setBounds(362, 112, 70, 23);
+        ButtonToAdmin.setBounds(362, 112, 70, 32);
 
         jLabel2.setFont(new java.awt.Font("Bookman Old Style", 1, 24)); // NOI18N
         jLabel2.setText("SOA for High Dimentional Private Data ");
@@ -109,6 +118,38 @@ public class Home extends javax.swing.JApplet implements  AppletStub {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(215, 68, 83, 17);
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(80, 250, 560, 220);
+
+        webC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                webCActionPerformed(evt);
+            }
+        });
+        jPanel1.add(webC);
+        webC.setBounds(200, 210, 190, 24);
+
+        jLabel3.setText("Search on web: ");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(100, 210, 91, 16);
+
+        searchOnWeb.setText("Go");
+        searchOnWeb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchOnWebActionPerformed(evt);
+            }
+        });
+        jPanel1.add(searchOnWeb);
+        searchOnWeb.setBounds(410, 210, 45, 30);
+
+        jLabel4.setText("Enter the topic below you want to search on web");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(100, 180, 290, 16);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,14 +157,11 @@ public class Home extends javax.swing.JApplet implements  AppletStub {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -211,6 +249,28 @@ public class Home extends javax.swing.JApplet implements  AppletStub {
     t1.start();
     }//GEN-LAST:event_ButtonToVoteActionPerformed
 
+    private void webCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_webCActionPerformed
+
+    private void searchOnWebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchOnWebActionPerformed
+      ArrayList<String> links =new ArrayList<String>();
+        WebController wc=new WebController();
+      
+      String keyword=webC.getText();
+        try {
+            links=wc.GetsearchEngineLinks(keyword);
+        } catch (IOException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        jTextArea1.setText("\t\t"+"Important Links to study the Topic: "+keyword+"\n"+
+        "\t\t---------------------------------------------------------\n");
+        for (String link : links) {
+            jTextArea1.append(link+"\n");
+        }
+    }//GEN-LAST:event_searchOnWebActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonToAdmin;
@@ -218,7 +278,13 @@ public class Home extends javax.swing.JApplet implements  AppletStub {
     private javax.swing.JButton ButtonToVote;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JButton searchOnWeb;
+    private javax.swing.JTextField webC;
     // End of variables declaration//GEN-END:variables
 
     @Override

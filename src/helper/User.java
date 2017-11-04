@@ -2,6 +2,7 @@
 package helper;
 
 import java.io.Serializable;
+import static org.junit.Assert.assertEquals;
 
 
 public class User implements Serializable{//user class
@@ -25,5 +26,9 @@ public class User implements Serializable{//user class
    public boolean verify(String id,String pwd){//method to check the id and password belongs to the user
         
         return id.equals(username)&&pwd.equals(password);
+    }
+    
+    public String verifyUser(String id, String pass){//method to check the id and password belongs to the user
+    return id+pass;
     }
 }

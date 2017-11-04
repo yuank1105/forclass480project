@@ -7,10 +7,16 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import sapplet.Admin;
 
 
 public class Test {
     public static void main(String[] args) throws FileNotFoundException, IOException {
+        
+        Admin admim=new Admin();
+        admim.setVisible(true);
+        
+        
         //user test
         ArrayList<User> users=new ArrayList<>();
      
